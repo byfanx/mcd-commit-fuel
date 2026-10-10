@@ -1,0 +1,25 @@
+{
+  "name": "mcd-commit-fuel-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "代码换麦麦：根据本地开发节奏在状态栏给出麦当劳积分、优惠券与餐品推荐。参赛作品，非麦当劳官方产品。",
+  "license": "MIT",
+  "author": "byfanx",
+  "type": "module",
+  "workspaces": [
+    "packages/core",
+    "packages/cli"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean",
+    "test": "npm run build && node --test \"packages/*/dist/**/*.test.js\""
+  },
+  "devDependencies": {
+    "@types/node": "22.7.5",
+    "typescript": "5.6.3"
+  }
+}

@@ -1,12 +1,15 @@
 node_modules/
 dist/
 out/
+*.tsbuildinfo
 *.vsix
 *.log
 .env
 .env.*
 !.env.example
 .DS_Store
+.handoff/
+CLAUDE.local.md
 .idea/
 .vscode/*
 !.vscode/launch.json

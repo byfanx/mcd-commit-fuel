@@ -1,0 +1,19 @@
+{
+  "name": "@mcd-commit-fuel/core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MCP 客户端、开发者状态机、缓存与推荐。参赛作品，非麦当劳官方产品。",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
