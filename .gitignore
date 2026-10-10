@@ -1,0 +1,13 @@
+node_modules/
+dist/
+out/
+*.vsix
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
