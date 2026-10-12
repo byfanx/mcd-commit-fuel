@@ -1,0 +1,20 @@
+{
+  "name": "mcd-commit-fuel",
+  "version": "0.1.0",
+  "private": true,
+  "description": "mcd-fuel 命令行：Claude Code statusline、后台刷新与 Commit 小票。",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "mcd-fuel": "./dist/bin.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "bundle": "esbuild src/bin.ts --bundle --platform=node --format=esm --target=node22 --outfile=../../release/mcd-fuel.mjs"
+  },
+  "dependencies": {
+    "@mcd-commit-fuel/core": "0.1.0"
+  }
+}
