@@ -221,6 +221,7 @@ export async function prepareReceipt(options: ReceiptOptions): Promise<string> {
     stats: dailyStats(cache.signals, now),
     data: toFuelData(cache.data),
     lateNight,
+    printedAt: now,
     period: currentPeriod(now, lateNight),
   });
 }

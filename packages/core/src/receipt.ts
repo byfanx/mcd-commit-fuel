@@ -9,6 +9,8 @@ export interface ReceiptInput {
   stats: DailyStats;
   data: FuelData;
   lateNight: boolean;
+  /** 打印时间，毫秒时间戳 */
+  printedAt?: number;
   /** 默认按 lateNight 判断：夜宵或加餐 */
   period?: MealPeriod;
   width?: number;
@@ -37,9 +39,7 @@ export function renderReceipt(input: ReceiptInput): string {
   center('MCD COMMIT FUEL 今日小票');
   rule('-');
   row('日期', stats.date);
-  if (stats.firstTs !== undefined && stats.lastTs !== undefined) {
-    row('时段', `${hhmm(stats.firstTs)} - ${hhmm(stats.lastTs)}`);
-  }
+  if (input.printedAt !== undefined) row('时间', hhmm(input.printedAt));
   row('提交', `x ${stats.commits}`);
   if (stats.reverts > 0) row('Revert', `x ${stats.reverts}`);
   if (stats.releases > 0) row('发版', `x ${stats.releases}`);

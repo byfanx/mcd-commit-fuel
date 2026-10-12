@@ -39,13 +39,15 @@ test('receipt has counts and a light pick with nutrition, no disclaimer', () => 
       myCoupons: { total: 8, coupons: [] },
     },
     lateNight: false,
+    printedAt: T(18, 40),
   });
   assert.doesNotMatch(r, /非麦当劳官方产品|参赛/);
   assert.match(r, /提交 +x 12/);
   assert.match(r, /Revert +x 1/);
   assert.match(r, /测试 +通过 8 \/ 失败 3/);
   assert.match(r, /14 分钟/);
-  assert.match(r, /时段 +09:05 - 18:40/);
+  assert.match(r, /时间 +18:40/);
+  assert.doesNotMatch(r, /时段/);
   assert.match(r, /苹果片/);
   assert.match(r, /32 kcal/);
   assert.match(r, /积分 +1200/);
