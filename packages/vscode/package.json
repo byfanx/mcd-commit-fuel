@@ -1,0 +1,133 @@
+{
+  "name": "mcd-commit-fuel-vscode",
+  "displayName": "MCD Commit Fuel",
+  "description": "根据本地 git 提交与构建节奏，在状态栏显示麦当劳积分、优惠券与按餐段推荐的餐品。代码不出本机。",
+  "version": "0.1.0",
+  "publisher": "byfanx",
+  "icon": "assets/icon.png",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/byfanx/mcd-commit-fuel.git"
+  },
+  "type": "module",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.cjs",
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "不受信任的工作区中不读取 git 记录。"
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "mcdFuel.showDetails",
+        "title": "查看详情",
+        "category": "MCD Fuel"
+      },
+      {
+        "command": "mcdFuel.showCoupons",
+        "title": "查看全部可用的券",
+        "category": "MCD Fuel"
+      },
+      {
+        "command": "mcdFuel.refresh",
+        "title": "立即刷新",
+        "category": "MCD Fuel"
+      },
+      {
+        "command": "mcdFuel.showReceipt",
+        "title": "今日小票",
+        "category": "MCD Fuel"
+      },
+      {
+        "command": "mcdFuel.setToken",
+        "title": "设置 MCP token",
+        "category": "MCD Fuel"
+      },
+      {
+        "command": "mcdFuel.clearToken",
+        "title": "清除 MCP token",
+        "category": "MCD Fuel"
+      },
+      {
+        "command": "mcdFuel.order",
+        "title": "点一份餐品（按餐段推荐，到店自取，需确认）",
+        "category": "MCD Fuel"
+      },
+      {
+        "command": "mcdFuel.claimCoupons",
+        "title": "领取可领的券（需确认）",
+        "category": "MCD Fuel"
+      },
+      {
+        "command": "mcdFuel.teamMeal",
+        "title": "请团队吃一顿（团餐外送，需确认）",
+        "category": "MCD Fuel"
+      }
+    ],
+    "configuration": {
+      "title": "MCD Commit Fuel",
+      "properties": {
+        "mcdFuel.pollMinutes": {
+          "type": "number",
+          "default": 30,
+          "minimum": 5,
+          "description": "轮询刷新间隔（分钟）。窗口失焦时暂停。"
+        },
+        "mcdFuel.buildMinutes": {
+          "type": "number",
+          "default": 3,
+          "minimum": 1,
+          "description": "构建或测试运行超过多少分钟算作“构建等待”。"
+        },
+        "mcdFuel.dailyNudgeLimit": {
+          "type": "number",
+          "default": 2,
+          "minimum": 0,
+          "description": "同一类状态提醒每天最多显示几次，超过后状态栏只显示积分和券数。"
+        },
+        "mcdFuel.releaseTagPattern": {
+          "type": "string",
+          "default": "^v?\\d+\\.\\d+\\.\\d+",
+          "description": "识别发版 tag 的正则表达式。"
+        },
+        "mcdFuel.lateNight": {
+          "type": "boolean",
+          "default": true,
+          "description": "22:00 到 06:00 只推荐轻食和不含咖啡因的饮品。"
+        },
+        "mcdFuel.trackTerminal": {
+          "type": "boolean",
+          "default": true,
+          "description": "记录终端里构建/测试命令的耗时和结果（需要开启 shell integration）。只记录类别，不记录命令内容。"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "bundle": "esbuild src/extension.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --outfile=out/extension.cjs",
+    "package": "npm run bundle && node -e \"const fs=require('node:fs');fs.copyFileSync('../../LICENSE','LICENSE');fs.mkdirSync('../../release',{recursive:true})\" && vsce package --no-dependencies --out ../../release/mcd-commit-fuel-vscode-0.1.0.vsix"
+  },
+  "dependencies": {
+    "@mcd-commit-fuel/core": "0.1.0"
+  },
+  "devDependencies": {
+    "@types/vscode": "1.93.0",
+    "@vscode/vsce": "3.2.1",
+    "esbuild": "0.25.0"
+  }
+}

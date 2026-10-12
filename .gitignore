@@ -2,6 +2,10 @@ node_modules/
 dist/
 out/
 *.tsbuildinfo
+# 打包产物（vsix 和单文件 CLI），发布到 GitHub Releases
+release/
+# 打包 .vsix 时从根目录复制
+packages/vscode/LICENSE
 *.vsix
 *.log
 .env
